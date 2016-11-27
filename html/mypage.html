@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>マイページ</title>
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
+  <link rel="stylesheet" type="text/css" href="css/ngProgress.css" />
+  <link rel="stylesheet" type="text/css" href="css/app.css" />
+</head>
+<body ng-controller="MyController as main">
+  <div class="container tight ng-cloak" ng-cloak ng-show="model.show">
+    <h1>マイページ</h1>
+    <div class="description">
+    </div>
+    <form name="myForm" ng-submit="main.onsubmit()" novalidate>
+      <div id="validation-summary">
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="email">メールアドレス<br /></label>
+            <div class="col-xs-8">
+              <span id="email" name="email" ng-bind="model.email" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="nickname">お名前<br /><span class="label label-warning">任意</span></label>
+            <div class="col-xs-8">
+              <input id="nickname" name="nickname" type="text" class="form-control" style="width:60%;" ng-model="model.nickname" />
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="category">所属<br /><span class="label label-warning">任意</span></label>
+            <div class="col-xs-8">
+              <select ng-model="model.category" class="form-control" id="category" name="category" style="width:60%;"
+                      ng-options="option.name for option in model.categoryList track by option.value"></select>
+              <span>selected = {{model.category}}</span>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="my_date">日付<br /><span class="label label-warning">任意</span></label>
+            <div class="col-xs-8">
+              <div style="display: inline-block;">
+                  <span class="date datepicker-days period-start" style="display: inline-block;">
+                      <input type="text"
+                             class="form-control"
+                             ng-model="model.my_date"
+                             datepicker-popup
+                             is-open="model.datePickerOpen">
+                  </span>
+                  <button type="button" class="btn btn-default btn-add-on" ng-click="model.toggleDatePicker($event)">
+                      <i class="btn-icon btn-calendar"></i>
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="memo">備考<br /><span class="label label-warning">任意</span></label>
+            <div class="col-xs-8">
+              <textarea id="memo" name="memo" class="form-control txa-w-570" cols="40" maxlength="4000" rows="4" style="width:80%;" ng-model="model.memo"></textarea>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-xs-4 control-label" for="now_string">今日</label>
+            <div class="col-xs-8">
+              <input id="now_string" name="now_string" type="text" readonly="readonly" class="form-control ime-mode txt-w-100 readonly" style="width:60%;" ng-model="model.now_string" />
+            </div>
+          </div>
+          <!-- 
+          <div class="submit-frame">
+            <input type="submit" value="設定" id="customform-submit" class="btn btn-block btn-submit" ng-disabled="myForm.$invalid" />
+          </div>
+            -->
+          <div class="submit-frame">
+            <button class="btn btn-block btn-logout" ng-click="main.logout()">ログアウト</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">Copyright &copy; 2016</p>
+    </div>
+  </div>
+</body>
+<script src="scripts/jsbn.js"></script>
+<script src="scripts/jsbn2.js"></script>
+<script src="scripts/sjcl.js"></script>
+<script src="scripts/moment.min.js"></script>
+<script src="scripts/aws-cognito-sdk.min.js"></script>
+<script src="scripts/amazon-cognito-identity.min.js"></script>
+<script src="//sdk.amazonaws.com/js/aws-sdk-2.3.5.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+<!-- 日本語ロケールをロードしておくことでカレンダーの曜日表示が日本語になる -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.3.14/angular-locale_ja-jp.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap-tpls.min.js"></script>
+<script src="scripts/ngprogress.min.js"></script>
+<script src="scripts/mypage.js"></script>
+</html>
